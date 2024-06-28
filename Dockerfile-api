@@ -1,0 +1,13 @@
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
+WORKDIR /app
+
+# 의존성 설치
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    python3-dev
+COPY ./app /app
+COPY ./requirements.txt /app/
+
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
